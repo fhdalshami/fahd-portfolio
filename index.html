@@ -54,20 +54,20 @@ nav{display:flex;gap:clamp(14px,2.2vw,28px)}
 nav a{text-decoration:none;color:var(--muted);transition:color .2s}
 nav a:hover{color:var(--ink)}
 /* البانر الرئيسي: كارت #222222 بعمودين (النص + صورتك). overflow:hidden عشان الصورة المقطوعة من تحت ما تطلعش بره الحواف */
-.banner{background:var(--panel);border-radius:28px;padding:56px 48px 0;display:grid;grid-template-columns:1.4fr 1fr;gap:32px;align-items:end;overflow:hidden;min-height:440px}
-.banner .copy{padding-bottom:56px}
-.banner .logo{width:min(100%,460px);height:auto;display:block;margin-bottom:32px}
-h1{font-size:clamp(34px,5vw,56px);line-height:1.05;margin:0 0 18px;font-weight:800;letter-spacing:-.02em}
-.lead{color:var(--muted);max-width:46ch;margin:0 0 28px}
+.banner{background:var(--panel);border-radius:28px;padding:40px 40px 0;display:grid;grid-template-columns:1.4fr 1fr;gap:28px;align-items:end;overflow:hidden;min-height:340px}
+.banner .copy{padding-bottom:40px}
+.banner .logo{width:min(100%,260px);height:auto;display:block;margin-bottom:22px}
+h1{font-size:clamp(24px,3vw,34px);line-height:1.15;margin:0 0 12px;font-weight:800;letter-spacing:-.01em}
+.lead{color:var(--muted);font-size:16px;max-width:46ch;margin:0 0 22px}
 /* صف الأزرار في البانر: بينزل لسطر جديد لو المكان ضاق (flex-wrap) */
 .btns{display:flex;gap:12px;flex-wrap:wrap}
 /* الزرار العادي: كبسولة بحد أبيض. .solid نسخته المملوءة بالأبيض. وعند hover بيتعكس اللون */
-.btn{display:inline-block;padding:12px 22px;border-radius:999px;border:1px solid #fff;text-decoration:none;font-weight:600;transition:background .2s,color .2s}
+.btn{display:inline-block;padding:10px 18px;font-size:15px;border-radius:999px;border:1px solid #fff;text-decoration:none;font-weight:600;transition:background .2s,color .2s}
 .btn.solid{background:#fff;color:#000}
 .btn:hover{background:#fff;color:#000}
 .btn.solid:hover{background:transparent;color:#fff}
 /* صورة الميموجي: نص دايرة بتطلع من تحت البانر (border-radius فوق بس). animation هي حركة الظهور */
-.peek{justify-self:center;width:min(100%,300px);aspect-ratio:1;border-radius:50% 50% 0 0;overflow:hidden;background:#1c1c1c;animation:peek .9s cubic-bezier(.2,.8,.2,1) both}
+.peek{justify-self:center;width:min(100%,230px);aspect-ratio:1;border-radius:50% 50% 0 0;overflow:hidden;background:#1c1c1c;animation:peek .9s cubic-bezier(.2,.8,.2,1) both}
 .peek img{width:100%;height:100%;object-fit:cover;display:block}
 /* خطوات حركة peek: تبدأ منزلة 60% لتحت وتطلع لمكانها */
 @keyframes peek{from{transform:translateY(60%)}to{transform:none}}
@@ -86,17 +86,12 @@ h2{font-size:clamp(26px,3.4vw,36px);margin:0 0 28px;font-weight:600;letter-spaci
 /* عنوان الصف، و small هو السطر الصغير تحته (زي اسم الشركة) */
 .proj h3{margin:0;font-size:22px;font-weight:600}.proj h3 small{display:block;font-size:16px;font-weight:400;color:var(--muted)}/* قائمة بسيطة بخطوط فاصلة (للتعليم والشهادات) */
 .plain{list-style:none;padding:0;margin:0}.plain li{padding:10px 0;border-bottom:1px solid var(--line);color:#d4d4d4}.plain li:first-child{border-top:1px solid var(--line)}.plain small{display:block;color:var(--muted);font-size:15px}.links{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+/* عنوان الشركة فوق صفوف الخبرات (لأن الوظايف الثلاث في شركة واحدة) */
+.company{margin:0 0 24px}
+.company h3{margin:0;font-size:22px;font-weight:600}
+.company p{margin:4px 0 0;color:var(--muted)}
 .proj p{margin:0;color:var(--muted)}
 .proj span{color:var(--muted);white-space:nowrap}
-/* ===== شريط الأرقام (Stats) ===== */
-/* 4 كروت جنب بعض على الديسكتوب. padding-top أصغر من باقي الأقسام عشان يقرب من البانر */
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;padding-top:24px}
-/* كل كارت: خلفية #222222 وجواه الرقم والوصف تحت بعض */
-.stat{background:var(--panel);border-radius:20px;padding:24px;display:flex;flex-direction:column;gap:4px}
-/* الرقم الكبير (clamp بيكبّره ويصغّره حسب الشاشة) */
-.stat strong{font-size:clamp(32px,5vw,48px);line-height:1.1;font-weight:800}
-/* الوصف الصغير تحت الرقم */
-.stat span{color:var(--muted);font-size:15px}
 /* كارت التواصل في آخر الصفحة */
 .contact{background:var(--panel);border-radius:28px;padding:56px 48px;text-align:center}
 .contact h2{margin-bottom:12px}
@@ -123,6 +118,7 @@ footer{text-align:center;color:var(--muted);padding:56px 0 40px;font-size:15px}
 .ibtn.solid:hover{background:transparent;color:#fff}
 .ibtn svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 /* أيقونة LinkedIn مملوءة بدل خطوط (fill بدل stroke) */
+.btns .ibtn{width:42px;height:42px}
 .ibtn svg.fill{fill:currentColor;stroke:none}
 /* كل عناوين الأقسام وروابط القائمة بحروف كبيرة (uppercase) مع تباعد بين الحروف */
 h2,nav a{text-transform:uppercase}
@@ -150,13 +146,11 @@ nav a{padding:14px 16px;border-radius:10px;color:#fff;font-size:17px}
 nav a:hover{background:#2e2e2e}
 .wrap{padding:0 16px}
 body{font-size:17px}
-.banner{grid-template-columns:1fr;padding:36px 24px 0;min-height:0}
+.banner{grid-template-columns:1fr;padding:28px 20px 0;min-height:0}
 .banner .copy{padding-bottom:0}
-.peek{width:220px}
+.peek{width:170px}
 .about{grid-template-columns:1fr}
 .proj .row{grid-template-columns:1fr;gap:6px}
-/* كروت الأرقام: عمودين بدل 4 على الموبايل */
-.stats{grid-template-columns:repeat(2,1fr)}
 .contact{padding:40px 24px}
 }
 /* لو المستخدم مفعّل "تقليل الحركة" في جهازه: نوقف حركة الميموجي والتمرير الناعم */
@@ -196,14 +190,6 @@ body{font-size:17px}
 <div class="peek"><img src="data:image/jpeg;base64,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" alt="Fahd peeking over a laptop"></div>
 </div>
 
-<!-- ===== شريط الأرقام: 4 إحصائيات سريعة. عدّل الرقم داخل strong والوصف داخل span ===== -->
-<section class="stats" aria-label="Highlights">
-<div class="stat"><strong>6+</strong><span>Years at Oula</span></div>
-<div class="stat"><strong>43</strong><span>Fuel stations supported</span></div>
-<div class="stat"><strong>3</strong><span>Roles held</span></div>
-<div class="stat"><strong>2</strong><span>Languages spoken</span></div>
-</section>
-
 <!-- ===== قسم About: وصف عنك + حبوب المهارات (ul.skills). لإضافة مهارة ضيف li جديد ===== -->
 <section id="about">
 <div class="about">
@@ -227,10 +213,12 @@ body{font-size:17px}
 <!-- قسم الخبرات: كل وظيفة صف .row (المسمى والشركة، الوصف، التاريخ). الأحدث فوق -->
 <section id="experience">
 <h2>Experience</h2>
+<!-- الشركة مرة واحدة فوق: الاسم، فترة العمل، ومدة العمل الحالية (بتتحسب تلقائياً بالجافاسكريبت تحت. النص جوه span هو البديل لو الجافاسكريبت ما اشتغلش) -->
+<div class="company"><h3>Oula Fuel Marketing Company</h3><p>Dec 2019 – Present · <span id="tenure">6+ years</span> · three roles in one company</p></div>
 <div class="proj">
-<div class="row"><h3>Developer<small>Oula Fuel Marketing Company</small></h3><p>Designing and building software for Oula and Ultra Logistics systems, from requirements to production support.</p><span>Mar 2026 – Present</span></div>
-<div class="row"><h3>Junior Developer<small>Oula Fuel Marketing Company</small></h3><p>Developed, maintained and monitored public and intranet web apps and mobile apps, with test cases, user guides and technical documentation.</p><span>Apr 2023 – Mar 2026</span></div>
-<div class="row"><h3>Technical Support Engineer<small>Oula Fuel Marketing Company</small></h3><p>Supported 43 fuel stations: monitoring data connections, troubleshooting, DOMS PSS 5000 setup and TLS 450 Plus tank gauging configuration.</p><span>Dec 2019 – Apr 2023</span></div>
+<div class="row"><h3>Developer</h3><p>Designing and building software for Oula and Ultra Logistics systems, from requirements to production support.</p><span>Mar 2026 – Present</span></div>
+<div class="row"><h3>Junior Developer</h3><p>Developed, maintained and monitored public and intranet web apps and mobile apps, with test cases, user guides and technical documentation.</p><span>Apr 2023 – Mar 2026</span></div>
+<div class="row"><h3>Technical Support Engineer</h3><p>Supported 43 fuel stations: monitoring data connections, troubleshooting, DOMS PSS 5000 setup and TLS 450 Plus tank gauging configuration.</p><span>Dec 2019 – Apr 2023</span></div>
 </div>
 </section>
 
@@ -351,6 +339,19 @@ body{font-size:17px}
       navigator.clipboard.writeText(EMAIL).then(function(){ show('Email copied: '+EMAIL); },function(){ show(EMAIL); });
     } else { show(EMAIL); }
   });
+})();
+</script>
+<!-- ===== الجافاسكريبت 4: حساب مدة العمل في الشركة تلقائياً ===== -->
+<script>
+(function(){
+  var el=document.getElementById('tenure'); if(!el) return;
+  var now=new Date();
+  // بداية العمل: ديسمبر 2019 (الشهر 12). بنعد الشهر الحالي كامل زي ما LinkedIn بيعمل
+  var months=(now.getFullYear()-2019)*12+(now.getMonth()+1-12)+1;
+  var y=Math.floor(months/12), m=months%12;
+  var txt=y+(y===1?' year':' years');
+  if(m) txt+=' '+m+(m===1?' month':' months');
+  el.textContent=txt;
 })();
 </script>
 </body>
