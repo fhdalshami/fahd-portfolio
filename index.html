@@ -154,6 +154,49 @@ body{font-size:17px}
 }
 /* لو المستخدم مفعّل "تقليل الحركة" في جهازه: نوقف حركة الميموجي والتمرير الناعم */
 @media(prefers-reduced-motion:reduce){.peek{animation:none}html{scroll-behavior:auto}}
+/* ===== كارت التعريف الإلكتروني (في قسم Contact) ===== */
+/* الكارت: خلفية سودا وحد رفيع ليظهر فوق كارت التواصل الرمادي. العرض أقصاه 420px ومتوسّط */
+.idcard{max-width:420px;margin:0 auto 32px;background:#000;border:1px solid var(--line);border-radius:24px;padding:22px;text-align:start}
+/* الصف العلوي: صورة الميموجي على جنب والنصوص جنبها */
+.idtop{display:flex;align-items:center;gap:16px;padding-bottom:18px;border-bottom:1px solid var(--line)}
+/* الصورة دايرية بحجم 84px */
+.idtop img{width:84px;height:84px;border-radius:50%;object-fit:cover;background:#1c1c1c;flex:none}
+/* الاسم والوظيفة ومكان الشغل */
+.idtop h3{margin:0;font-size:22px;font-weight:800}
+.contact .idtop p{margin:2px 0 0;color:var(--muted);font-size:15px}
+.contact .idtop .role{color:#fff;font-size:17px;font-weight:600}
+/* قائمة الرقم والإيميل والمكان: كل سطر أيقونة + نص */
+.idlinks{list-style:none;margin:0;padding:16px 0 0;display:grid;gap:12px}
+.idlinks li{display:flex;align-items:center;gap:12px;font-size:16px;word-break:break-word}
+.idlinks a{text-decoration:none}
+.idlinks a:hover{text-decoration:underline;text-underline-offset:4px}
+/* أيقونات الكارت الصغيرة (بتاخد لون النص) */
+.ic{width:20px;height:20px;flex:none;fill:none;stroke:var(--muted);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+/* ===== الكارت كـ Popup ===== */
+/* الغلاف: طبقة تغطي الشاشة كلها بخلفية معتمة وضبابية، ومخفي من البداية */
+.idwrap{position:fixed;inset:0;z-index:60;display:none;flex-direction:column;align-items:center;justify-content:center;padding:24px;background:rgba(0,0,0,.72);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);overflow:auto}
+/* لما نضغط الأيقونة بيتضاف الكلاس open: الخلفية تظهر بنعومة */
+.idwrap.open{display:flex;animation:fade .25s ease both}
+/* والكارت نفسه يطلع بحركة Pop: يكبر من صغير ويتخطى حجمه شوية ويرجع (الرقم 1.56 بيحدد قوة الارتداد) */
+.idwrap.open .idcard{animation:popup .55s cubic-bezier(.34,1.56,.64,1) both}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@keyframes popup{from{opacity:0;transform:scale(.6) translateY(30px)}to{opacity:1;transform:none}}
+/* الأيقونة اللي بتفتح الكارت (في صف الأيقونات تحت في قسم Contact) */
+.idtoggle{cursor:pointer;font:inherit}
+/* الكارت جوه الـ Popup: ياخد العرض المتاح لحد 420px وعليه ظل */
+.idwrap .idcard{position:relative;width:100%;margin:0 0 18px;box-shadow:0 20px 60px rgba(0,0,0,.6)}
+/* زرار الإغلاق ✕ في ركن الشاشة */
+.idclose{position:absolute;top:calc(16px + env(safe-area-inset-top,0px));right:16px;width:44px;height:44px;padding:0;border-radius:50%;background:#222;color:#fff;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;cursor:pointer}
+.idclose svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round}
+.idclose:hover{background:#fff;color:#000}
+/* إيموجي التلويح 👋 على ركن الكارت، بيلوّح مرتين بعد ما الكارت يظهر */
+.wave{position:absolute;top:-20px;right:20px;font-size:36px;line-height:1;transform-origin:70% 70%}
+.idwrap.open .wave{animation:wave 1.3s .5s 2}
+@keyframes wave{0%,60%,100%{transform:rotate(0)}10%{transform:rotate(16deg)}20%{transform:rotate(-8deg)}30%{transform:rotate(16deg)}40%{transform:rotate(-4deg)}50%{transform:rotate(10deg)}}
+/* أيقونتين Share وSave تحت الكارت */
+.idactions{display:flex;gap:14px;justify-content:center}
+.idactions .ibtn{cursor:pointer;font:inherit}
+@media(prefers-reduced-motion:reduce){.idwrap.open,.idwrap.open .idcard,.idwrap.open .wave{animation:none}}
 /* رسالة صغيرة تظهر تحت الشاشة (مثلاً: تم نسخ الإيميل). الكلاس show بيضيفه الجافاسكريبت */
 .toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px);background:#fff;color:#000;padding:12px 20px;border-radius:999px;font-weight:600;font-size:15px;opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;z-index:50}
 .toast.show{opacity:1;transform:translate(-50%,0)}
@@ -261,6 +304,34 @@ h1{position:relative}
 <div class="contact">
 <h2>Let’s work together</h2>
 <p>Have a project or an opening on your team? Send me a message.</p>
+<!-- ===== كارت التعريف الإلكتروني: الصورة + الاسم + الوظيفة الحالية + مكان الشغل + الرقم والإيميل. عدّل أي نص هنا مباشرة ===== -->
+<!-- الغلاف: مخفي لحد ما نضغط الأيقونة (الكلاس open بيظهره). جواه الكارت وأزرار المشاركة والحفظ -->
+<div class="idwrap" id="idwrap" role="dialog" aria-modal="true" aria-label="My contact card">
+<!-- زرار الإغلاق ✕ (الضغط على الخلفية المعتمة أو زرار Esc بيقفلوا الـ Popup كمان) -->
+<button class="idclose" id="cardClose" type="button" aria-label="Close" title="Close"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+<div class="idcard">
+<span class="wave" aria-hidden="true">👋</span>
+<div class="idtop">
+<img src="data:image/jpeg;base64,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" alt="Fahd">
+<div>
+<h3>Fahd Al-Shami</h3>
+<p class="role">Developer</p>
+<p class="where">Oula Fuel Marketing Company</p>
+</div>
+</div>
+<ul class="idlinks">
+<li><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg><a href="tel:+96596000645">+965 9600 0645</a></li>
+<li><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><a href="mailto:fahdalshamie@gmail.com" data-mail>fahdalshamie@gmail.com</a></li>
+<li><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg><span>Kuwait</span></li>
+</ul>
+</div>
+<!-- أيقونتين: الأولى Share بتفتح قائمة المشاركة في الموبايل (ومنها Save Image لحفظها في الألبوم)، والتانية Save بتنزّل الصورة كملف PNG -->
+<div class="idactions">
+<button class="ibtn solid" id="cardShare" type="button" aria-label="Share card as image" title="Share"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="m8.2 10.8 7.6-4.4M8.2 13.2l7.6 4.4"/></svg></button>
+<button class="ibtn" id="cardSave" type="button" aria-label="Save card as image" title="Save image"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11"/><path d="m7 11 5 5 5-5"/><path d="M5 20h14"/></svg></button>
+</div>
+</div>
+<noscript><style>.idtoggle,.idclose,.idactions{display:none}.idwrap{display:block;position:static;background:none;padding:0}</style></noscript>
 <!-- الفورم: الجافاسكريبت في آخر الملف بيرسله لخدمة Formspree. novalidate معناها إننا بنتحقق بنفسنا بدل رسائل المتصفح. required بتجعل الحقل إجباري -->
 <form id="cf" class="cform" novalidate>
 <label>Name<input name="name" required autocomplete="name"></label>
@@ -272,7 +343,9 @@ h1{position:relative}
 <p class="status" role="status" aria-live="polite"></p>
 </form>
 <!-- أيقونات التواصل الدايرية. aria-label وtitle بيدوا كل أيقونة اسم لقارئات الشاشة والـ tooltip. رابط LinkedIn بيفتح في تبويب جديد (target=_blank)، ومعاه rel=noopener للأمان -->
-<div class="links"><a class="ibtn solid" id="mailBtn" href="mailto:fahdalshamie@gmail.com" aria-label="Email" title="Email"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></a><a class="ibtn" href="https://www.linkedin.com/in/fahd-al-shami-37b14b24b" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn"><svg class="fill" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.94 5a2 2 0 1 1-4-.002 2 2 0 0 1 4 .002zM7 8.48H3V21h4V8.48zm6.32 0H9.34V21h3.94v-6.57c0-3.66 4.77-4 4.77 0V21H22v-7.93c0-6.17-7.06-5.94-8.72-2.91l.04-1.68z"/></svg></a><a class="ibtn" href="Fahd-Al-Shami-CV.pdf" download aria-label="Download CV" title="Download CV"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11"/><path d="m7 11 5 5 5-5"/><path d="M5 20h14"/></svg></a></div>
+<div class="links"><!-- أيقونة الكارت: بتفتح كارت التعريف (Popup) وفيه الرقم والإيميل. مكانها هو مكان أيقونة الإيميل القديمة، aria-expanded بيعرّف قارئات الشاشة هل الكارت مفتوح -->
+<button class="ibtn solid idtoggle" id="cardToggle" type="button" aria-expanded="false" aria-controls="idwrap" aria-label="Show my card" title="My card"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="11" r="2"/><path d="M6 16c.6-1.4 1.7-2 3-2s2.4.6 3 2"/><path d="M15 10h3M15 13h3"/></svg></button>
+<a class="ibtn" href="https://www.linkedin.com/in/fahd-al-shami-37b14b24b" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn"><svg class="fill" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.94 5a2 2 0 1 1-4-.002 2 2 0 0 1 4 .002zM7 8.48H3V21h4V8.48zm6.32 0H9.34V21h3.94v-6.57c0-3.66 4.77-4 4.77 0V21H22v-7.93c0-6.17-7.06-5.94-8.72-2.91l.04-1.68z"/></svg></a><a class="ibtn" href="Fahd-Al-Shami-CV.pdf" download aria-label="Download CV" title="Download CV"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11"/><path d="m7 11 5 5 5-5"/><path d="M5 20h14"/></svg></a></div>
 </div>
 </section>
 </main>
@@ -336,12 +409,13 @@ h1{position:relative}
 <!-- ===== الجافاسكريبت 3: زرار الإيميل ===== -->
 <script>
 (function(){
-  var m=document.getElementById('mailBtn'), t=document.getElementById('toast');
-  if(!m||!t) return;
+  var t=document.getElementById('toast');
+  if(!t) return;
   var EMAIL='fahdalshamie@gmail.com';
   // دالة تعرض رسالة صغيرة لمدة 2.6 ثانية
   function show(msg){ t.textContent=msg; t.classList.add('show'); setTimeout(function(){ t.classList.remove('show'); },2600); }
-  m.addEventListener('click',function(e){
+  // الدالة دي بتتربط بأي عنصر عليه data-mail (أيقونة الإيميل + الإيميل في الكارت)
+  function onMail(e){
     // على الموبايل (شاشة لمس): نسيب رابط mailto يفتح تطبيق الإيميل عادي
     if(!window.matchMedia('(hover:hover) and (pointer:fine)').matches) return;
     // على الكمبيوتر: غالباً مفيش برنامج إيميل مضبوط، فننسخ العنوان بدل ما ما يحصلش حاجة
@@ -349,7 +423,8 @@ h1{position:relative}
     if(navigator.clipboard&&navigator.clipboard.writeText){
       navigator.clipboard.writeText(EMAIL).then(function(){ show('Email copied: '+EMAIL); },function(){ show(EMAIL); });
     } else { show(EMAIL); }
-  });
+  }
+  [].forEach.call(document.querySelectorAll('[data-mail]'),function(a){ a.addEventListener('click',onMail); });
 })();
 </script>
 <!-- ===== الجافاسكريبت 4: حساب مدة العمل في الشركة تلقائياً ===== -->
@@ -387,6 +462,78 @@ h1{position:relative}
     else { setTimeout(function(){ h.classList.add('tw-done'); },1800); } // بعد الانتهاء بثانيتين تقريباً نخفي المؤشر
   }
   setTimeout(step,500);                    // نبدأ بعد نص ثانية من فتح الصفحة
+})();
+</script>
+<!-- ===== الجافاسكريبت 6: إظهار الكارت + حفظه ومشاركته كصورة ===== -->
+<script>
+(function(){
+  var tg=document.getElementById('cardToggle'), wrap=document.getElementById('idwrap');
+  var sh=document.getElementById('cardShare'), sv=document.getElementById('cardSave'), toast=document.getElementById('toast');
+  if(!tg||!wrap||!sh||!sv) return;
+  var cache=null; // الصورة بعد ما تتعمل بتتخزن هنا عشان ما نعيدش رسمها
+  // رسالة صغيرة تحت الشاشة
+  function say(m){ if(!toast) return; toast.textContent=m; toast.classList.add('show'); setTimeout(function(){ toast.classList.remove('show'); },2600); }
+  // دالة ترسم مستطيل بحواف دايرية
+  function rr(c,x,y,w,h,r){ c.beginPath(); c.moveTo(x+r,y); c.arcTo(x+w,y,x+w,y+h,r); c.arcTo(x+w,y+h,x,y+h,r); c.arcTo(x,y+h,x,y,r); c.arcTo(x,y,x+w,y,r); c.closePath(); }
+  // بتجيب نص عنصر من الصفحة: فالصورة بتتعمل من نفس بيانات الكارت (أي تعديل في الكارت يظهر فيها)
+  function txt(sel){ var e=document.querySelector(sel); return e?e.textContent.trim():''; }
+  // رسم الكارت كصورة PNG مقاس 1080×1380
+  function draw(){
+    var F='"Bricolage Grotesque",system-ui,-apple-system,"Segoe UI",sans-serif';
+    // نتأكد إن الخط اتحمّل قبل الرسم
+    var load=(document.fonts&&document.fonts.load)?Promise.all([document.fonts.load('800 60px "Bricolage Grotesque"'),document.fonts.load('400 40px "Bricolage Grotesque"')]).catch(function(){}):Promise.resolve();
+    var img=document.querySelector('.idtop img');
+    return load.then(function(){
+      return new Promise(function(res){ if(img.complete) res(); else img.onload=res; });
+    }).then(function(){
+      var W=1080,H=1380,c=document.createElement('canvas'); c.width=W; c.height=H;
+      var g=c.getContext('2d');
+      g.fillStyle='#000'; g.fillRect(0,0,W,H);                         // الخلفية السودا
+      g.fillStyle='#222222'; rr(g,60,60,W-120,H-120,56); g.fill();     // الكارت #222222
+      // صورة الميموجي داخل دايرة
+      g.save(); g.beginPath(); g.arc(W/2,330,150,0,Math.PI*2); g.closePath(); g.clip();
+      g.fillStyle='#1c1c1c'; g.fillRect(W/2-150,180,300,300); g.drawImage(img,W/2-150,180,300,300); g.restore();
+      // الاسم والوظيفة ومكان الشغل
+      g.textAlign='center'; g.textBaseline='alphabetic'; g.fillStyle='#fff';
+      g.font='800 68px '+F; g.fillText(txt('.idtop h3'),W/2,600);
+      g.font='600 44px '+F; g.fillText(txt('.idtop .role'),W/2,670);
+      g.fillStyle='#a3a3a3'; g.font='400 36px '+F; g.fillText(txt('.idtop .where'),W/2,726);
+      g.fillStyle='#2e2e2e'; g.fillRect(150,790,W-300,2);               // خط فاصل
+      // الرقم والإيميل والمكان، كل واحد بإيموجي
+      var rows=[['📞',txt('.idlinks a[href^="tel"]')],['✉️',txt('.idlinks a[data-mail]')],['📍',txt('.idlinks li:last-child span')]];
+      g.textAlign='left'; g.fillStyle='#fff'; g.font='400 42px '+F;
+      rows.forEach(function(r,i){ var y=900+i*110; g.fillText(r[0],150,y); g.fillText(r[1],230,y); });
+      g.textAlign='center'; g.fillStyle='#a3a3a3'; g.font='400 34px '+F; g.fillText('👋  Nice to meet you',W/2,1230);
+      return new Promise(function(r){ c.toBlob(r,'image/png'); });
+    });
+  }
+  function getBlob(){ return cache||(cache=draw()); }
+  var closeBtn=document.getElementById('cardClose');
+  // فتح الـ Popup: نقفل تمرير الصفحة اللي ورا، ونجهز الصورة بدري، وننقل التركيز لزرار الإغلاق (للكيبورد وقارئات الشاشة)
+  function openCard(){ wrap.classList.add('open'); tg.setAttribute('aria-expanded','true'); document.body.style.overflow='hidden'; getBlob(); if(closeBtn) closeBtn.focus(); }
+  // إغلاق الـ Popup: نرجّع التمرير والتركيز لأيقونة الفتح
+  function closeCard(){ wrap.classList.remove('open'); tg.setAttribute('aria-expanded','false'); document.body.style.overflow=''; tg.focus(); }
+  tg.addEventListener('click',openCard);                                   // الضغط على الأيقونة يفتح
+  if(closeBtn) closeBtn.addEventListener('click',closeCard);               // زرار ✕ يقفل
+  wrap.addEventListener('click',function(e){ if(e.target===wrap) closeCard(); }); // الضغط على الخلفية المعتمة يقفل
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&wrap.classList.contains('open')) closeCard(); }); // زرار Esc يقفل
+  // Save image: تنزيل الصورة كملف
+  function download(b){
+    var a=document.createElement('a'); a.href=URL.createObjectURL(b); a.download='Fahd-Al-Shami-card.png';
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(function(){ URL.revokeObjectURL(a.href); },2000); say('Image saved');
+  }
+  sv.addEventListener('click',function(){ getBlob().then(download); });
+  // Share: قائمة المشاركة بتاعة الجهاز (على الآيفون منها Save Image بتحفظها في الألبوم). لو الجهاز مش بيدعم المشاركة بنزّل الصورة
+  sh.addEventListener('click',function(){
+    getBlob().then(function(b){
+      var f=new File([b],'Fahd-Al-Shami-card.png',{type:'image/png'});
+      if(navigator.canShare&&navigator.canShare({files:[f]})){
+        return navigator.share({files:[f],title:'Fahd Al-Shami'}).catch(function(e){ if(e&&e.name!=='AbortError') say('Could not share'); });
+      }
+      download(b);
+    });
+  });
 })();
 </script>
 </body>
