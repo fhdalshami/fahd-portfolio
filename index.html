@@ -10,13 +10,13 @@
 <title>Portfolio</title>
 <meta name="theme-color" content="#000000">
 <!-- Open Graph: معاينة الرابط على واتساب وLinkedIn. لازم تفضل ثابتة في الـ HTML لأن الزحف بيقرا الـ HTML بس (مش بيشغّل الجافاسكريبت).
-     بدّل YOUR-USERNAME باسم حسابك أو بالدومين. وعدّل النصوص هنا لو غيّرت اسمك أو وصفك -->
+     الرابطين دول لموقعك على GitHub Pages. بدّلهم بالدومين لما تشتريه. وعدّل النصوص هنا لو غيّرت اسمك أو وصفك -->
 <meta name="description" content="iOS (Swift) and .NET developer building mobile and web applications.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Fahd Al-Shami – iOS &amp; .NET Developer">
 <meta property="og:description" content="iOS (Swift) and .NET developer building mobile and web applications.">
-<meta property="og:url" content="https://YOUR-USERNAME.github.io/fahd-portfolio/">
-<meta property="og:image" content="https://YOUR-USERNAME.github.io/fahd-portfolio/assets/og-image.png">
+<meta property="og:url" content="https://fhdalshami.github.io/fahd-portfolio/">
+<meta property="og:image" content="https://fhdalshami.github.io/fahd-portfolio/assets/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
@@ -26,10 +26,14 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&display=swap" rel="stylesheet">
 <!-- تحديد الثيم بدري (قبل ما الصفحة تترسم) عشان ما يحصلش وميض من الأبيض للأسود -->
-<script src="js/theme.js?v=2"></script>
+<script src="js/theme.js?v=4"></script>
 <!-- Bootstrap 5.3.3 (نسخة محلية جوه المشروع، مش من إنترنت) ثم تصميمنا فوقه -->
 <link rel="stylesheet" href="assets/vendor/bootstrap.min.css">
-<link rel="stylesheet" href="css/style.css?v=3">
+<link rel="stylesheet" href="css/theme.css?v=4">
+<link rel="stylesheet" href="css/base.css?v=4">
+<link rel="stylesheet" href="css/layout.css?v=4">
+<link rel="stylesheet" href="css/components.css?v=4">
+<link rel="stylesheet" href="css/accessibility.css?v=4">
 </head>
 <!-- is-loading: المحتوى مخفي لحد ما البيانات توصل من الداتا بيز (data.js بيشيل الكلاس ده) -->
 <body class="is-loading">
@@ -161,13 +165,8 @@
 <!-- رسالة صغيرة تحت الشاشة (toast) -->
 <div class="toast-msg" id="toast" role="status" aria-live="polite"></div>
 
-<!-- ===== الجافاسكريبت: Bootstrap أولاً، وبعدين config ثم الباقي. data.js آخر واحد ===== -->
+<!-- ===== الجافاسكريبت: Bootstrap (عادي)، وبعدها main.js كـ ES module. هو اللي بيستورد باقي الملفات (js/lib و js/render و js/features) ===== -->
 <script src="assets/vendor/bootstrap.bundle.min.js"></script>
-<script src="js/config.js?v=2"></script>
-<script src="js/email-copy.js?v=2"></script>
-<script src="js/contact-form.js?v=2"></script>
-<script src="js/typewriter.js?v=2"></script>
-<script src="js/card.js?v=2"></script>
-<script src="js/data.js?v=3"></script>
+<script type="module" src="js/main.js?v=4"></script>
 </body>
 </html>
