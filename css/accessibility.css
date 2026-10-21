@@ -1,0 +1,12 @@
+/* ==========================================================================
+   accessibility.css — إمكانية الوصول: تقليل الحركة لمن يفضّل ذلك
+   ========================================================================== */
+
+/* لو المستخدم مفعّل "تقليل الحركة": نوقف الحركات، والمهارات تبقى قابلة للتمرير يدوياً */
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .peek,.idwrap.open,.idwrap.open .idcard,.idwrap.open .wave{animation:none}
+  .marquee{overflow-x:auto;-webkit-mask-image:none;mask-image:none}
+  .marquee-track{animation:none}
+  .marquee-half + .marquee-half{display:none}
+}

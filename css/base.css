@@ -1,0 +1,31 @@
+/* ==========================================================================
+   base.css — الأساس: الخلفية والخطوط والعناوين وتأثير الزجاج (glass) وحالة التحميل
+   ========================================================================== */
+
+/* ===== الأساس والخلفية ===== */
+html{scroll-behavior:smooth;scroll-padding-top:90px}   /* التمرير الناعم + مسافة تحت الشريط الثابت */
+body{background:var(--bg);color:var(--ink);font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:6px}
+/* كرات الضوء في الخلفية: بتخلّي تأثير الزجاج باين.
+   بنرسمها بتدرج دايري (radial-gradient) بدل فلتر blur: أخف على الموبايل وبيظهر في كل الأجهزة.
+   الحجم max(نسبة من الشاشة، حد أدنى بالبكسل) عشان تفضل كبيرة وباينة على شاشة الموبايل الصغيرة */
+.bg-orbs{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
+.bg-orbs span{position:absolute;border-radius:50%}
+.bg-orbs span:nth-child(1){width:max(52vw,560px);height:max(52vw,560px);left:max(-14vw,-200px);top:max(-14vw,-180px);background:radial-gradient(closest-side,var(--orb1),transparent)}
+.bg-orbs span:nth-child(2){width:max(46vw,520px);height:max(46vw,520px);right:max(-14vw,-220px);top:38vh;background:radial-gradient(closest-side,var(--orb2),transparent)}
+.bg-orbs span:nth-child(3){width:max(50vw,560px);height:max(50vw,560px);left:max(8vw,-120px);bottom:max(-22vw,-260px);background:radial-gradient(closest-side,var(--orb3),transparent)}
+main{padding-top:96px}
+.section{padding-top:88px}
+.is-loading main,.is-loading footer{opacity:0}               /* مخفي لحد ما البيانات توصل */
+main,footer{transition:opacity .4s ease}
+h1,h2,h3{font-weight:800;letter-spacing:-.01em}
+/* عناوين الأقسام: حروف كبيرة */
+h2{font-size:clamp(22px,3vw,30px);font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin:0 0 28px}
+
+/* ===== الزجاج (Glass): خلفية شفافة + ضبابية + حد رفيع + ظل ===== */
+.glass,.glass-nav,.item,.plain li,.skill,.idcard{
+  background:var(--glass-bg);
+  -webkit-backdrop-filter:blur(18px) saturate(150%);backdrop-filter:blur(18px) saturate(150%);
+  border:1px solid var(--glass-border);box-shadow:var(--glass-shadow);
+}

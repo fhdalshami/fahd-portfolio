@@ -1,0 +1,29 @@
+/* ==========================================================================
+   theme.css — المتغيرات: ألوان الثيم الداكن والفاتح والخط. غيّر القيمة هنا تتغير في الصفحة كلها
+   ========================================================================== */
+
+/* ===== المتغيرات: الألوان لكل ثيم. غيّر القيمة هنا تتغير في الصفحة كلها ===== */
+:root{
+  --font:"Bricolage Grotesque",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --bs-body-font-family:var(--font);   /* نخلّي Bootstrap يستخدم خطنا */
+}
+/* الثيم الداكن (الأساسي): الخلفية سودا والزجاج #222222 شفاف */
+[data-bs-theme=dark]{
+  --bs-body-bg:#000; --bs-body-color:#fff; --bs-secondary-color:#a3a3a3; --bs-border-color:rgba(255,255,255,.14);
+  --bg:#000; --ink:#fff; --muted:#a3a3a3; --line:rgba(255,255,255,.12);
+  --glass-bg:rgba(34,34,34,.55); --glass-bg-strong:rgba(34,34,34,.78);
+  --glass-border:rgba(255,255,255,.14); --glass-shadow:0 8px 32px rgba(0,0,0,.45);
+  --chip-bg:rgba(255,255,255,.08);
+  --orb1:rgba(110,130,255,.30); --orb2:rgba(255,255,255,.12); --orb3:rgba(90,200,200,.20);
+  color-scheme:dark;
+}
+/* الثيم الفاتح */
+[data-bs-theme=light]{
+  --bs-body-bg:#f3f3f6; --bs-body-color:#111; --bs-secondary-color:#5f5f66; --bs-border-color:rgba(0,0,0,.14);
+  --bg:#f3f3f6; --ink:#111; --muted:#5f5f66; --line:rgba(0,0,0,.12);
+  --glass-bg:rgba(255,255,255,.55); --glass-bg-strong:rgba(255,255,255,.82);
+  --glass-border:rgba(255,255,255,.7); --glass-shadow:0 8px 32px rgba(40,40,80,.12);
+  --chip-bg:rgba(0,0,0,.05);
+  --orb1:rgba(90,110,255,.30); --orb2:rgba(255,130,170,.26); --orb3:rgba(80,200,190,.26);
+  color-scheme:light;
+}
