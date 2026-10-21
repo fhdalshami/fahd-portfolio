@@ -17,7 +17,7 @@
   --glass-bg:rgba(34,34,34,.55); --glass-bg-strong:rgba(34,34,34,.78);
   --glass-border:rgba(255,255,255,.14); --glass-shadow:0 8px 32px rgba(0,0,0,.45);
   --chip-bg:rgba(255,255,255,.08);
-  --orb1:rgba(110,130,255,.20); --orb2:rgba(255,255,255,.08); --orb3:rgba(90,200,200,.12);
+  --orb1:rgba(110,130,255,.30); --orb2:rgba(255,255,255,.12); --orb3:rgba(90,200,200,.20);
   color-scheme:dark;
 }
 /* الثيم الفاتح */
@@ -27,7 +27,7 @@
   --glass-bg:rgba(255,255,255,.55); --glass-bg-strong:rgba(255,255,255,.82);
   --glass-border:rgba(255,255,255,.7); --glass-shadow:0 8px 32px rgba(40,40,80,.12);
   --chip-bg:rgba(0,0,0,.05);
-  --orb1:rgba(90,110,255,.22); --orb2:rgba(255,130,170,.18); --orb3:rgba(80,200,190,.18);
+  --orb1:rgba(90,110,255,.30); --orb2:rgba(255,130,170,.26); --orb3:rgba(80,200,190,.26);
   color-scheme:light;
 }
 
@@ -36,12 +36,14 @@ html{scroll-behavior:smooth;scroll-padding-top:90px}   /* التمرير الن�
 body{background:var(--bg);color:var(--ink);font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased}
 a{color:inherit}
 :focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:6px}
-/* كرات الضوء في الخلفية: بتخلّي تأثير الزجاج باين */
+/* كرات الضوء في الخلفية: بتخلّي تأثير الزجاج باين.
+   بنرسمها بتدرج دايري (radial-gradient) بدل فلتر blur: أخف على الموبايل وبيظهر في كل الأجهزة.
+   الحجم max(نسبة من الشاشة، حد أدنى بالبكسل) عشان تفضل كبيرة وباينة على شاشة الموبايل الصغيرة */
 .bg-orbs{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
-.bg-orbs span{position:absolute;border-radius:50%;filter:blur(90px)}
-.bg-orbs span:nth-child(1){width:48vw;height:48vw;left:-14vw;top:-12vw;background:var(--orb1)}
-.bg-orbs span:nth-child(2){width:40vw;height:40vw;right:-12vw;top:35vh;background:var(--orb2)}
-.bg-orbs span:nth-child(3){width:44vw;height:44vw;left:20vw;bottom:-20vw;background:var(--orb3)}
+.bg-orbs span{position:absolute;border-radius:50%}
+.bg-orbs span:nth-child(1){width:max(52vw,560px);height:max(52vw,560px);left:max(-14vw,-200px);top:max(-14vw,-180px);background:radial-gradient(closest-side,var(--orb1),transparent)}
+.bg-orbs span:nth-child(2){width:max(46vw,520px);height:max(46vw,520px);right:max(-14vw,-220px);top:38vh;background:radial-gradient(closest-side,var(--orb2),transparent)}
+.bg-orbs span:nth-child(3){width:max(50vw,560px);height:max(50vw,560px);left:max(8vw,-120px);bottom:max(-22vw,-260px);background:radial-gradient(closest-side,var(--orb3),transparent)}
 main{padding-top:96px}
 .section{padding-top:88px}
 .is-loading main,.is-loading footer{opacity:0}               /* مخفي لحد ما البيانات توصل */
